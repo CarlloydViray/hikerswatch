@@ -180,24 +180,26 @@ class _homePageScreenState extends State<homePageScreen> {
         }
         return SafeArea(
             child: Scaffold(
+          appBar: AppBar(
+            title: const Text('My Location'),
+            centerTitle: true,
+          ),
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(
-                  height: 30,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(currentPosition == null
+                        ? 'Unknown Latitude'
+                        : 'Latitude: ${currentPosition!.latitude}'),
+                    Text(currentPosition == null
+                        ? 'Unknown Longitude'
+                        : 'Longitude: ${currentPosition!.longitude}'),
+                  ],
                 ),
-                const Text(
-                  'My Location',
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text(currentPosition == null
-                    ? 'Unknown Latitude'
-                    : 'Latitude: ${currentPosition!.latitude}'),
-                Text(currentPosition == null
-                    ? 'Unknown Longitude'
-                    : 'Longitude: ${currentPosition!.longitude}'),
                 const SizedBox(
                   height: 12,
                 ),
@@ -212,6 +214,10 @@ class _homePageScreenState extends State<homePageScreen> {
                   height: 12,
                 ),
                 ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color(0xffE57C23)),
+                    ),
                     onPressed: () {
                       Navigator.of(context).push(CupertinoPageRoute(
                           builder: (context) => const cityWeatherScreen()));
@@ -224,6 +230,7 @@ class _homePageScreenState extends State<homePageScreen> {
                   height: MediaQuery.of(context).size.height * 0.6,
                   width: MediaQuery.of(context).size.width * 1,
                   child: Card(
+                    color: const Color(0XFF025464),
                     elevation: 10,
                     child: Column(
                       children: [
@@ -233,12 +240,15 @@ class _homePageScreenState extends State<homePageScreen> {
                         const Text(
                           'Weather Forecast',
                           style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w900),
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white),
                         ),
                         const SizedBox(
                           height: 30,
                         ),
                         CircleAvatar(
+                          backgroundColor: const Color(0xffE57C23),
                           maxRadius: 50,
                           child: Image.network(
                             icon,
@@ -252,7 +262,9 @@ class _homePageScreenState extends State<homePageScreen> {
                         Text(
                           desc,
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w900),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white),
                         ),
                         const SizedBox(
                           height: 50,
@@ -263,17 +275,24 @@ class _homePageScreenState extends State<homePageScreen> {
                             const Text(
                               'Temperature (Celcius):',
                               style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w900),
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white),
                             ),
-                            Text(temp, style: const TextStyle(fontSize: 20)),
+                            Text(temp,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
                             const SizedBox(
                               height: 20,
                             ),
                             const Text('Humidity (Percent):',
                                 style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.w900)),
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white)),
                             Text(humidity.toString(),
-                                style: const TextStyle(fontSize: 20)),
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
                           ],
                         )
                       ],

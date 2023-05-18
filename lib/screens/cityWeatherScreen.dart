@@ -132,6 +132,7 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextField(
                   controller: cityController,
@@ -141,8 +142,12 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
                   height: 12,
                 ),
                 ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color(0xffE57C23)),
+                    ),
                     onPressed: getWeather,
-                    child: const Text('Get Current Location')),
+                    child: const Text('Get City Weather')),
                 const SizedBox(
                   height: 20,
                 ),
@@ -150,6 +155,7 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
                   height: MediaQuery.of(context).size.height * 0.6,
                   width: MediaQuery.of(context).size.width * 1,
                   child: Card(
+                    color: const Color(0XFF025464),
                     elevation: 10,
                     child: Column(
                       children: [
@@ -159,12 +165,15 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
                         const Text(
                           'Weather Forecast',
                           style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w900),
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white),
                         ),
                         const SizedBox(
                           height: 30,
                         ),
                         CircleAvatar(
+                          backgroundColor: const Color(0xffE57C23),
                           maxRadius: 50,
                           child: Image.network(
                             icon,
@@ -178,7 +187,9 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
                         Text(
                           desc,
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w900),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white),
                         ),
                         const SizedBox(
                           height: 50,
@@ -189,17 +200,24 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
                             const Text(
                               'Temperature (Celcius):',
                               style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w900),
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white),
                             ),
-                            Text(temp, style: const TextStyle(fontSize: 20)),
+                            Text(temp,
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
                             const SizedBox(
                               height: 20,
                             ),
                             const Text('Humidity (Percent):',
                                 style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.w900)),
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white)),
                             Text(humidity.toString(),
-                                style: const TextStyle(fontSize: 20)),
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white)),
                           ],
                         )
                       ],
