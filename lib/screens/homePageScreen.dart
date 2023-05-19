@@ -151,7 +151,8 @@ class _homePageScreenState extends State<homePageScreen> {
           }
         } else {
           var error = response.statusCode;
-          print("Error: $error");
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(error.toString())));
         }
       }
     });

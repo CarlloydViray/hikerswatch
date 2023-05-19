@@ -19,6 +19,7 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
   int humidity = 0;
   TextEditingController cityController = TextEditingController();
   Position? currentPosition;
+  final FocusNode _focusNode = FocusNode();
 
   Future<bool> checkServicePermission() async {
     LocationPermission locationPermission;
@@ -117,6 +118,10 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
     } else {
       var error = response.statusCode;
       print("Error: $error");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        action: SnackBarAction(label: 'Dismiss', onPressed: () {}),
+        content: const Text('Cannot recognize City'),
+      ));
     }
   }
 
@@ -135,6 +140,7 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextField(
+                  focusNode: _focusNode,
                   controller: cityController,
                   decoration: const InputDecoration(label: Text('City Name')),
                 ),
@@ -146,7 +152,10 @@ class _cityWeatherScreenState extends State<cityWeatherScreen> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           const Color(0xffE57C23)),
                     ),
-                    onPressed: getWeather,
+                    onPressed: () {
+                      _focusNode.unfocus();
+                      getWeather();
+                    },
                     child: const Text('Get City Weather')),
                 const SizedBox(
                   height: 20,
